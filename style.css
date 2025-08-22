@@ -890,8 +890,6 @@
         
         /* Responsive */
         @media (max-width: 992px) {
-      
-            
             .carousel-video {
                 height: 400px;
             }
@@ -985,9 +983,20 @@
                 margin-bottom: 3rem !important;
                 text-align: center;
             }
+            .about-content h3{
+                text-align: center;
+                font-size: 30px;
+                margin-top: 15px;
+            }
         }
-        @media (max-width: 465px) {
+         @media (max-width: 465px) {
             .custom-title{
                 font-size: 2.5rem;
+            }
+            .abonne-count {
+                top: 344px;
+            }
+            .glass-player{
+                width: 90%!important;
             }
         }
