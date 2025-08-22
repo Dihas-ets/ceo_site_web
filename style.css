@@ -959,3 +959,21 @@
         .video-card:nth-child(3) {
             animation-delay: 0.4s;
         }
+
+         @media (max-width: 765px) {
+            .custom-title{
+                font-size: 40px;
+            }
+            .btn-play{
+                flex-direction: column;
+            }
+            .premier-pas{
+                margin: 5px;
+            }
+            .abonne-count{
+                top: 160px;
+            }
+            .navbar-brand span{
+                font-size: 25px;
+            }
+        }
