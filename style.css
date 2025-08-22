@@ -960,10 +960,12 @@
             animation-delay: 0.4s;
         }
 
-         @media (max-width: 765px) {
+         @media (max-width: 989px) {
             .custom-title{
-                font-size: 40px;
+                font-size: 3rem;
+                text-align: center;
             }
+
             .btn-play{
                 flex-direction: column;
             }
@@ -975,5 +977,17 @@
             }
             .navbar-brand span{
                 font-size: 25px;
+            }
+            .row-reverse-sm{
+                flex-direction: column-reverse;
+            }
+            .custum-padding{
+                margin-bottom: 3rem !important;
+                text-align: center;
+            }
+        }
+        @media (max-width: 465px) {
+            .custom-title{
+                font-size: 2.5rem;
             }
         }
