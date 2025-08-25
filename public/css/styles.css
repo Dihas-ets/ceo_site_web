@@ -1,0 +1,87 @@
+/* Reset basique */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background-color: #2c3e50;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #34495e;
+    border-radius: 5px;
+}
+
+/* Contenu principal */
+.main-content {
+    margin-left: 220px; /* laisse de la place pour la sidebar */
+    padding: 20px;
+}
+
+/* Projet cards */
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+
+.project-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #34495e;
+}
+
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.project-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 250px;
+    border-radius: 5px;
+    text-align: center;
+}
