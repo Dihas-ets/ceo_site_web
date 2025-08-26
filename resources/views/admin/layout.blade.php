@@ -3,106 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Optionnel : Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<style>
-        /* Sidebar custom */
-        body {
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .sidebar {
-            min-width: 220px;
-            max-width: 220px;
-            background-color: #343a40;
-            color: #fff;
-            min-height: 100vh;
-        }
-        .sidebar .nav-link {
-            color: #fff;
-        }
-        .sidebar .nav-link:hover {
-            background-color: #495057;
-            border-radius: 5px;
-        }
-        .main-content {
-            padding: 20px;
-            flex-grow: 1;
-        }
-        @media (max-width: 768px) {
-            .sidebar {
-                position: absolute;
-                left: -220px;
-                transition: left 0.3s;
-                z-index: 1000;
-            }
-            .sidebar.show {
-                left: 0;
-            }
+    <title>Admin - @yield('title', 'Tableau de bord')</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Sidebar */
+        #sidebar { width: 250px; min-height: 100vh; background-color: #212529; }
+        #sidebar .nav-link { color: #fff; transition: 0.2s; }
+        #sidebar .nav-link:hover { background-color: rgba(255,255,255,0.1); border-radius: 8px; }
+
+        /* Hover effects */
+        .hover-card { transition: transform 0.3s, box-shadow 0.3s; }
+        .hover-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px){
+            #sidebar { width: 100%; min-height: auto; position: relative; }
         }
     </style>
+    @yield('styles')
 </head>
 <body>
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <nav class="sidebar d-flex flex-column p-3">
-            <h4 class="mb-4">Admin</h4>
+<div class="d-flex flex-column flex-lg-row">
 
-            
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fas fa-home me-2"></i>Dashboard</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="{{ route('admin.projects.index') }}"><i class="fas fa-folder me-2"></i>Espace Projet</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="{{ route('admin.podcasts.index') }}"><i class="fas fa-microphone me-2"></i>Podcasts</a>
-                </li>
-                <li class="nav-item mb-2">
-    <a class="nav-link" href="{{ route('admin.socials.index') }}">
-        <i class="fas fa-share-alt me-2"></i>Réseaux Sociaux
-    </a>
-</li>
+    {{-- Sidebar --}}
+    <nav id="sidebar" class="p-3 text-white">
+        <h4 class="text-center mb-4">MonSite</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link d-flex align-items-center">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a href="{{ route('admin.projects.index') }}" class="nav-link d-flex align-items-center">
+                    <i class="bi bi-kanban-fill me-2"></i> Projets
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a href="{{ route('admin.podcasts.index') }}" class="nav-link d-flex align-items-center">
+                    <i class="bi bi-mic-fill me-2"></i> Podcasts
+                </a>
+            </li>
+            @if(auth()->user()->role === 'admin')
+            <li class="nav-item mb-2">
+                <a href="{{ route('admin.users.index') }}" class="nav-link d-flex align-items-center">
+                    <i class="bi bi-people-fill me-2"></i> Utilisateurs
+                </a>
+            </li>
+            @endif
+        </ul>
+    </nav>
 
-                <li class="nav-item mt-4">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger w-100"><i class="fas fa-sign-out-alt me-1"></i>Déconnexion</button>
-                    </form>
-                </li>
-            </ul>
+    {{-- Main content --}}
+    <div id="main" class="flex-grow-1 p-3">
+        {{-- Header (juste le profil) --}}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4 rounded">
+            <div class="container-fluid justify-content-end">
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" class="rounded-circle me-2" width="35" height="35">
+                        <span>{{ auth()->user()->name }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                               Déconnexion
+                            </a>
+                        </li>
+                    </ul>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                </div>
+            </div>
         </nav>
 
-        <!-- Contenu principal -->
-        <div class="main-content flex-grow-1">
-            <nav class="navbar navbar-light bg-light d-md-none mb-3">
-                <div class="container-fluid">
-                    <button class="btn btn-outline-secondary" id="toggleSidebar"><i class="fas fa-bars"></i></button>
-                    <span class="navbar-brand mb-0 h1">Dashboard Admin</span>
-                </div>
-            </nav>
-
-            @yield('content')
-        </div>
+        {{-- Contenu principal --}}
+        @yield('content')
     </div>
+</div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const toggleBtn = document.getElementById('toggleSidebar');
-        const sidebar = document.querySelector('.sidebar');
-
-        if(toggleBtn){
-            toggleBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('show');
-            });
-        }
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@yield('scripts')
 </body>
 </html>

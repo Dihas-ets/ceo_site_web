@@ -20,15 +20,18 @@ class LoginController extends Controller
         
     }
 
-    protected function authenticated(Request $request, $user)
+    protected function authenticated($request, $user)
     {
-        if ($user->is_admin) {
-            return redirect()->intended('/admin/dashboard');
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
         }
-
-        Auth::logout();
-        return redirect('/login')->withErrors([
-            'email' => 'Vous n’êtes pas autorisé à accéder.',
-        ]);
+    
+        if ($user->role === 'gestionnaire') {
+            return redirect()->route('admin.dashboard'); // 👈 redirige aussi vers le dashboard admin
+        }
+    
+        return redirect()->route('welcome');
     }
+    
+
 }

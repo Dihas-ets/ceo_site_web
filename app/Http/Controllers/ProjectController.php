@@ -7,6 +7,14 @@ use App\Models\Project;
 
 class ProjectController extends Controller
 {
+
+    public function __construct() 
+    {
+        $this->middleware('auth'); // seul middleware nécessaire
+        // $this->middleware('is_admin'); ← ligne à supprimer si elle existait
+    }
+    
+
     // Affiche la liste des projets
     public function index()
     {
@@ -39,7 +47,10 @@ class ProjectController extends Controller
             'link' => $request->link,
         ]);
 
-        return redirect()->route('admin.projects.index')->with('success', 'Projet ajouté avec succès !');
+        $redirectRoute = auth()->user()->role === 'admin' ? 'admin.projects.index' : 'gestionnaire.projects.index';
+
+        return redirect()->route($redirectRoute)->with('success', 'Projet ajouté avec succès !');
+        
     }
 
     public function edit(Project $project)
@@ -65,7 +76,10 @@ class ProjectController extends Controller
 
     $project->update($data);
 
-    return redirect()->route('admin.projects.index')->with('success', 'Projet mis à jour avec succès !');
+    $redirectRoute = auth()->user()->role === 'admin' ? 'admin.projects.index' : 'gestionnaire.projects.index';
+
+return redirect()->route($redirectRoute)->with('success', 'Projet ajouté avec succès !');
+
 }
 
 public function destroy(Project $project)
@@ -76,7 +90,10 @@ public function destroy(Project $project)
 
     $project->delete();
 
-    return redirect()->route('admin.projects.index')->with('success', 'Projet supprimé avec succès !');
+    $redirectRoute = auth()->user()->role === 'admin' ? 'admin.projects.index' : 'gestionnaire.projects.index';
+
+return redirect()->route($redirectRoute)->with('success', 'Projet ajouté avec succès !');
+
 }
 
 

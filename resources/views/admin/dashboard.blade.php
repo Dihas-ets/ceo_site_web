@@ -1,14 +1,13 @@
 @extends('admin.layout')
 
-@section('content')
-    <div class="container mt-5">
-        <h1>Bienvenue sur le Dashboard Admin 🚀</h1>
-        <p>Bienvenue madame.</p>
+@section('title', 'Tableau de bord')
 
-        <!-- Bouton de déconnexion -->
-        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-danger">Déconnexion</button>
-        </form>
-    </div>
+@section('content')
+<div class="container-fluid">
+    @include('admin.dashboard-content') {{-- Contenu réel du dashboard --}}
+</div>
+@endsection
+
+@section('scripts')
+    @include('admin.dashboard-scripts') {{-- Scripts pour graphiques et interactions --}}
 @endsection

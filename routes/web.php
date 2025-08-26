@@ -1,57 +1,45 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PodcastController;
+use App\Http\Controllers\admin\SocialController;
+use App\Http\Controllers\Admin\UserController;
 
+// Page d'accueil
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+// Auth sans inscription publique
 Auth::routes([
     'register' => false,
 ]);
 
-Route::middleware(['auth', 'is_admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])
-        ->name('admin.dashboard');
+/*
+|--------------------------------------------------------------------------
+| ROUTES ADMIN / GESTIONNAIRE
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('/admin/projects', [ProjectController::class, 'index'])
-        ->name('admin.projects.index');
-    Route::get('/admin/projects/create', [ProjectController::class, 'create'])
-        ->name('admin.projects.create');
-    Route::post('/admin/projects', [ProjectController::class, 'store'])
-        ->name('admin.projects.store');
-});
+    // Dashboard (accessible par admin et gestionnaire)
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Projets (admin et gestionnaire)
+    Route::resource('projects', ProjectController::class);
 
-use App\Http\Controllers\PodcastController;
+    // Podcasts
+    Route::resource('podcasts', PodcastController::class);
+    Route::get('/podcasts/featured', [PodcastController::class, 'featured'])->name('podcasts.featured');
 
+    // Réseaux sociaux
+    Route::resource('socials', SocialController::class);
 
-    Route::get('/admin/podcasts', [PodcastController::class, 'index'])->name('admin.podcasts.index');
-    Route::get('/admin/podcasts/create', [PodcastController::class, 'create'])->name('admin.podcasts.create');
-    Route::post('/admin/podcasts', [PodcastController::class, 'store'])->name('admin.podcasts.store');
-
-// Modifier un projet
-Route::get('/admin/projects/{project}/edit', [ProjectController::class, 'edit'])->name('admin.projects.edit');
-Route::put('/admin/projects/{project}', [ProjectController::class, 'update'])->name('admin.projects.update');
-
-// Supprimer un projet
-Route::delete('/admin/projects/{project}', [ProjectController::class, 'destroy'])->name('admin.projects.destroy');
-
-// Modifier un podcast
-Route::get('/admin/podcasts/{podcast}/edit', [PodcastController::class, 'edit'])->name('admin.podcasts.edit');
-Route::put('/admin/podcasts/{podcast}', [PodcastController::class, 'update'])->name('admin.podcasts.update');
-
-// Supprimer un podcast
-Route::delete('/admin/podcasts/{podcast}', [PodcastController::class, 'destroy'])->name('admin.podcasts.destroy');
-
-// Page des podcasts en avant
-
-
-Route::get('/admin/podcasts/featured', [PodcastController::class, 'featured'])
-    ->name('admin.podcasts.featured');
-
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
-    Route::resource('socials', \App\Http\Controllers\Admin\SocialController::class);
+    // Utilisateurs → seulement admin
+    Route::middleware('role:admin')->group(function () {
+        Route::resource('users', UserController::class);
+    });
 });
