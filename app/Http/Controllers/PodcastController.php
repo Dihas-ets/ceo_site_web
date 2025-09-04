@@ -27,92 +27,119 @@ class PodcastController extends Controller
 
     // Enregistre le podcast en base
     public function store(Request $request)
+{
+    $request->validate([
+        'title'       => 'required|string|max:255',
+        'description' => 'required|string',
+        'author'      => 'required|string|max:255',
+        'category_id' => 'required|exists:categories,id',
+        'type'        => 'required|in:audio,video',
+        'format'      => 'required|in:lien,fichier',
+        'link'        => 'nullable|required_if:format,lien|url',
+        'file_path'   => 'nullable|required_if:format,fichier|file',
+        'duration'    => 'nullable|string|max:50',
+    ]);
+
+    $podcast = new Podcast();
+    $podcast->title       = $request->title;
+    $podcast->description = $request->description;
+    $podcast->author      = $request->author;
+    $podcast->category_id = $request->category_id;
+    $podcast->type        = $request->type;
+    $podcast->format      = $request->format;
+    $podcast->duration    = $request->duration;
+
+    // ✅ Status indépendant (audio ou vidéo)
+    $podcast->status = $request->has('status') ? 'publié' : 'brouillon';
+
+    // ✅ Mise en avant (indépendant aussi)
+    $podcast->featured = $request->has('featured');
+
+    // ✅ Fichier uploadé
+    if ($request->format === 'fichier' && $request->hasFile('file_path')) {
+        $podcast->file_path = $request->file('file_path')->store('podcasts', 'public');
+    }
+
+    // ✅ Lien externe
+    if ($request->format === 'lien') {
+        $podcast->link = $request->link;
+    }
+
+    // ✅ Image
+    if ($request->hasFile('image')) {
+        $podcast->image = $request->file('image')->store('podcasts/images', 'public');
+    }
+
+    $podcast->save();
+
+    return redirect()->route('admin.podcasts.index')
+                     ->with('success', 'Podcast ajouté avec succès !');
+}
+
+    // Formulaire d'édition
+    public function edit(Podcast $podcast)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'author' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'type' => 'required|in:audio,video',
-            'format' => 'required|in:lien,fichier',
-            'link' => 'nullable|required_if:format,lien|url',
-            'file_path' => 'nullable|required_if:format,fichier|file',
+        $categories = Category::all();
+        return view('admin.podcasts.edit', compact('podcast', 'categories'));
+    }
+
+    // Mise à jour
+    public function update(Request $request, Podcast $podcast)
+    {
+        $data = $request->only([
+            'title',
+            'author',
+            'category_id',
+            'type',
+            'format',
+            'link',
+            'description',
+            'duration'
         ]);
-
-        $podcast = new Podcast();
-        $podcast->title = $request->title;
-        $podcast->description = $request->description;
-        $podcast->author = $request->author;
-        $podcast->category_id = $request->category_id;
-        $podcast->type = $request->type;
-        $podcast->format = $request->format;
-
-        // Si format = fichier, on sauvegarde le fichier
-        if($request->format === 'fichier' && $request->hasFile('file_path')) {
-            $path = $request->file('file_path')->store('podcasts', 'public');
-            $podcast->file_path = $path;
+    
+        // ✅ Mise en avant (indépendante, audio ou vidéo)
+        $data['featured'] = $request->has('featured');
+    
+        // ✅ Status indépendant aussi
+        $data['status'] = $request->has('status') ? 'publié' : 'brouillon';
+    
+        // ✅ Fichier (si on modifie le fichier)
+        if ($request->hasFile('file_path')) {
+            $data['file_path'] = $request->file('file_path')->store('podcasts', 'public');
         }
-
-        // Si format = lien, on sauvegarde le lien
-        if($request->format === 'lien') {
-            $podcast->link = $request->link;
+    
+        // ✅ Image (si on modifie l’image)
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('podcasts/images', 'public');
         }
-
-        $podcast->save();
-
+    
+        $podcast->update($data);
+    
         return redirect()->route('admin.podcasts.index')
-                         ->with('success', 'Podcast ajouté avec succès !');
-    }
-
-// Formulaire d'édition
-public function edit(Podcast $podcast)
-{
-    $categories = Category::all();
-    return view('admin.podcasts.edit', compact('podcast', 'categories'));
-}
-
-
-// Mise à jour
-public function update(Request $request, Podcast $podcast)
-{
-    $data = $request->only(['title', 'author', 'category_id', 'type', 'format', 'link']);
-
-    // Checkbox "featured"
-    $data['featured'] = $request->has('featured'); // true si cochée, false sinon
-    
-    if($request->hasFile('file_path')){
-        $filePath = $request->file('file_path')->store('podcasts', 'public');
-        $data['file_path'] = $filePath;
+                         ->with('success', 'Podcast mis à jour avec succès !');
     }
     
-    $podcast->update($data);
-    
 
-    return redirect()->route('admin.podcasts.index')->with('success', 'Podcast mis à jour avec succès !');
-}
 
-// Supprimer
-public function destroy(Podcast $podcast)
-{
-    if($podcast->file_path){
-        \Storage::disk('public')->delete($podcast->file_path);
+    // Supprimer
+    public function destroy(Podcast $podcast)
+    {
+        if($podcast->file_path){
+            \Storage::disk('public')->delete($podcast->file_path);
+        }
+
+        $podcast->delete();
+
+        return redirect()->route('admin.podcasts.index')->with('success', 'Podcast supprimé avec succès !');
     }
 
-    $podcast->delete();
+    public function featured()
+    {
+        // On récupère uniquement les vidéos mises en avant
+        $podcasts = Podcast::where('featured', true)
+            ->where('type', 'video')
+            ->get();
 
-    return redirect()->route('admin.podcasts.index')->with('success', 'Podcast supprimé avec succès !');
-}
-
-public function featured()
-{
-    // On récupère uniquement les vidéos mises en avant
-    $podcasts = Podcast::where('featured', true)
-        ->where('type', 'video')
-        ->get();
-
-    return view('admin.podcasts.featured', compact('podcasts'));
-}
-
-
-
+        return view('admin.podcasts.featured', compact('podcasts'));
+    }
 }

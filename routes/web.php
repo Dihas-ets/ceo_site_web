@@ -7,11 +7,12 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\admin\SocialController;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Http\Controllers\FrontendController;
 // Page d'accueil
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+
+// Page d'accueil publique
+Route::get('/', [FrontendController::class, 'index'])->name('welcome');
+
 
 // Auth sans inscription publique
 Auth::routes([
@@ -43,3 +44,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::resource('users', UserController::class);
     });
 });
+
+
+Route::get('/premier-pas', [App\Http\Controllers\PremierPasController::class, 'index'])->name('premierpas.index');
+
+

@@ -11,13 +11,17 @@ class Podcast extends Model
 
     protected $fillable = [
         'title',
+        'description',
         'author',
         'category_id',
         'type',
         'format',
         'file_path',
         'link',
-        'featured', 
+        'featured',
+        'image',
+        'duration',
+        'status', // <-- Ajouté pour permettre l'enregistrement
     ];
     
 

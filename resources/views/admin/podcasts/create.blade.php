@@ -6,105 +6,109 @@
 
     <form action="{{ route('admin.podcasts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+
+        <!-- Titre -->
         <div class="mb-3">
             <label>Titre</label>
-            <input type="text" name="title" class="form-control" required>
+            <input type="text" name="title" class="form-control" required value="{{ old('title') }}">
         </div>
 
+        <!-- Description -->
         <div class="mb-3">
             <label>Description</label>
-            <textarea name="description" class="form-control" required></textarea>
+            <textarea name="description" class="form-control" required>{{ old('description') }}</textarea>
         </div>
 
+        <!-- Auteur -->
         <div class="mb-3">
             <label>Auteur</label>
-            <input type="text" name="author" class="form-control" required>
+            <input type="text" name="author" class="form-control" required value="{{ old('author') }}">
         </div>
 
+        <!-- Durée -->
+        <div class="mb-3">
+            <label>Durée</label>
+            <input type="text" name="duration" class="form-control" placeholder="Ex: 1h30" value="{{ old('duration') }}">
+        </div>
+
+        <!-- Image -->
+        <div class="mb-3">
+            <label>Image d'aperçu</label>
+            <input type="file" name="image" class="form-control">
+        </div>
+
+        <!-- Catégorie -->
         <div class="mb-3">
             <label>Catégorie</label>
             <select name="category_id" class="form-control" required>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
                 @endforeach
             </select>
         </div>
 
+        <!-- Type -->
         <div class="mb-3">
             <label>Type de podcast</label>
             <select name="type" id="typeSelect" class="form-control" required>
-                   <option value="audio">Audio</option>
-                  <option value="video">Vidéo</option>
+                <option value="audio" {{ old('type')=='audio' ? 'selected' : '' }}>Audio</option>
+                <option value="video" {{ old('type')=='video' ? 'selected' : '' }}>Vidéo</option>
             </select>
-
         </div>
 
+        <!-- Format -->
         <div class="mb-3">
             <label>Format</label>
-            <select name="format" id="format" class="form-control" required>
-                <option value="lien">Lien</option>
-                <option value="fichier">Fichier</option>
+            <select name="format" id="formatSelect" class="form-control" required>
+                <option value="lien" {{ old('format')=='lien' ? 'selected' : '' }}>Lien</option>
+                <option value="fichier" {{ old('format')=='fichier' ? 'selected' : '' }}>Fichier</option>
             </select>
         </div>
 
-        <div class="mb-3" id="link-field">
+        <!-- Lien -->
+        <div class="mb-3" id="linkField">
             <label>Lien du podcast</label>
-            <input type="text" name="link" class="form-control">
+            <input type="url" name="link" class="form-control" value="{{ old('link') }}">
         </div>
 
-        <div class="mb-3" id="file-field" style="display:none;">
+        <!-- Fichier -->
+        <div class="mb-3" id="fileField" style="display:none;">
             <label>Fichier du podcast</label>
             <input type="file" name="file_path" class="form-control">
         </div>
 
-        <div class="mb-3" id="featuredWrapper" style="display:none;">
-    <div class="form-check">
-        <input type="checkbox" name="featured" value="1" id="featuredCheck" class="form-check-input">
-        <label class="form-check-label" for="featuredCheck">Mettre en avant (vidéo uniquement)</label>
-    </div>
-</div>
+        <!-- Featured (mise en avant, audio ou vidéo) -->
+        <div class="mb-3">
+            <div class="form-check">
+                <input type="checkbox" name="featured" value="1" id="featuredCheck" class="form-check-input" {{ old('featured') ? 'checked' : '' }}>
+                <label for="featuredCheck" class="form-check-label">Mettre en avant</label>
+            </div>
+        </div>
 
-<script>
-function toggleFeaturedByType(){
-    const type = document.getElementById('typeSelect')?.value || '';
-    const box = document.getElementById('featuredWrapper');
-    if(!box) return;
-    box.style.display = (type === 'video') ? 'block' : 'none';
-    if(type !== 'video'){
-        const chk = document.getElementById('featuredCheck');
-        if(chk) chk.checked = false;
-    }
-}
-document.addEventListener('DOMContentLoaded', () => {
-    // IMPORTANT : ton select "Type" doit avoir id="typeSelect"
-    const typeSelect = document.getElementById('typeSelect');
-    if(typeSelect){
-        typeSelect.addEventListener('change', toggleFeaturedByType);
-        toggleFeaturedByType(); // au chargement
-    }
-});
-</script>
-
-
-
+        <!-- Status (publié/brouillon, audio ou vidéo) -->
+        <div class="mb-3">
+            <div class="form-check">
+                <input type="checkbox" name="status" value="publié" id="statusCheck" class="form-check-input" {{ old('status') == 'publié' ? 'checked' : '' }}>
+                <label for="statusCheck" class="form-check-label">Publié (sinon brouillon)</label>
+            </div>
+        </div>
 
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>
 
 <script>
-    const formatSelect = document.getElementById('format');
-    const linkField = document.getElementById('link-field');
-    const fileField = document.getElementById('file-field');
+function toggleFields() {
+    const format = document.getElementById('formatSelect').value;
+    document.getElementById('linkField').style.display = format === 'lien' ? 'block' : 'none';
+    document.getElementById('fileField').style.display = format === 'fichier' ? 'block' : 'none';
+}
 
-    formatSelect.addEventListener('change', function() {
-        if(this.value === 'lien') {
-            linkField.style.display = 'block';
-            fileField.style.display = 'none';
-        } else {
-            linkField.style.display = 'none';
-            fileField.style.display = 'block';
-        }
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    toggleFields();
+    document.getElementById('formatSelect').addEventListener('change', toggleFields);
+});
 </script>
 @endsection
