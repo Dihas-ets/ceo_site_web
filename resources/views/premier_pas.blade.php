@@ -349,9 +349,11 @@ videoModal.addEventListener('hidden.bs.modal', function () {
 
     <!-- Pagination Bootstrap -->
     <div class="text-center">
+    <ul class="pagination justify-content-center">
         {{ $podcasts->links() }}
-    </div>
-</section>
+    </ul>
+</div>
+
 
 
 
