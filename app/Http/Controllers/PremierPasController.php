@@ -37,7 +37,7 @@ class PremierPasController extends Controller
         $podcasts = Podcast::where('type', 'video')
                     
                     ->latest()
-                    ->get();
+                    ->paginate(6);
 
 
         return view('premier_pas', compact('featuredAudio', 'featuredVideos', 'podcasts'));

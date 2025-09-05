@@ -302,7 +302,6 @@ videoModal.addEventListener('hidden.bs.modal', function () {
 
 <section class="container podcast-video">
     <!-- Section Titre -->
-
     <div class="text-center mb-5">
         <h2 class="section-title">Tous mes podcasts</h2>
         <p class="section-title-p">
@@ -312,8 +311,8 @@ videoModal.addEventListener('hidden.bs.modal', function () {
     
     <!-- Section Grille de Podcasts -->
     <div class="row g-4 mb-5">
-        @forelse($podcasts as $index => $podcast)
-            <div class="col-md-6 col-lg-4 podcast-card {{ $index >= 3 ? 'd-none' : '' }}">
+        @forelse($podcasts as $podcast)
+            <div class="col-md-6 col-lg-4 podcast-card">
                 <div class="video-card"
                      data-bs-toggle="modal"
                      data-bs-target="#videoModal"
@@ -342,32 +341,19 @@ videoModal.addEventListener('hidden.bs.modal', function () {
                 </div>
             </div>
         @empty
-            <!-- Message si aucun podcast -->
             <div class="col-12 text-center">
                 <p class="text-muted">Aucun podcast disponible pour le moment.</p>
             </div>
         @endforelse
     </div>
 
-    <!-- Bouton Voir Plus -->
-    @if($podcasts->count() > 3)
-        <div class="text-center mb-5">
-            <button id="showMoreBtn" class="btn btn-outline-primary">Voir plus</button>
-        </div>
-    @endif
+    <!-- Pagination Bootstrap -->
+    <div class="text-center">
+        {{ $podcasts->links() }}
+    </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('showMoreBtn');
-    if(btn){
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.podcast-card.d-none').forEach(card => card.classList.remove('d-none'));
-            btn.style.display = 'none'; // cacher le bouton après avoir montré tout
-        });
-    }
-});
-</script>
+
 
 
    <!-- Footer -->

@@ -29,9 +29,11 @@ class FrontendController extends Controller
 
         // 🔹 Toutes les vidéos publiées
         $videos = Podcast::where('type', 'video')
-                        ->where('status','publié')
-                        ->latest()
-                        ->get();
+        ->where('status', 'publié')
+        ->latest()
+        ->take(6)
+        ->get();
+
 
         return view('welcome', compact('projects', 'latestAudio', 'videos'));
     }
