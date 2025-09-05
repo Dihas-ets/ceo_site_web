@@ -184,7 +184,7 @@ audio.addEventListener('ended', () => {
 
 
 
-<!-- Carousel Section – Vidéos mises en avant -->
+
 <!-- Carousel Section – Vidéos mises en avant -->
 <section class="carousel-section py-5">
     <div class="container">
@@ -229,16 +229,17 @@ audio.addEventListener('ended', () => {
                                         <i class="far fa-clock"></i> {{ $podcast->duration ?? 'N/A' }}
                                     </div>
 
-                                    <button class="btn btn-outline-primary btn-sm" 
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#videoModal"
-                                            @if($podcast->format === 'lien')
-                                                data-video="{{ $podcast->link }}"
-                                            @else
-                                                data-video="{{ asset('storage/'.$podcast->file_path) }}"
-                                            @endif>
-                                        ▶️ Regarder
-                                    </button>
+                                    <button class="btn btn-outline-primary btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#videoModal"
+        @if($podcast->format === 'lien')
+            data-video="{{ $podcast->link }}" {{-- déjà en embed --}}
+        @else
+            data-video="{{ asset('storage/'.$podcast->file_path) }}"
+        @endif>
+    ▶️ Regarder
+</button>
+
                                 </div>
                             </div>
                         </div>
@@ -269,9 +270,10 @@ audio.addEventListener('ended', () => {
       </div>
       <div class="modal-body p-0">
         <div class="ratio ratio-16x9">
-          <iframe id="videoFrame" class="rounded" src="" 
-                  title="Podcast Vidéo" frameborder="0" 
-                  allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="videoFrame" class="rounded w-100 h-100" src="" 
+        title="Podcast Vidéo" frameborder="0" 
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
         </div>
       </div>
     </div>
@@ -284,8 +286,11 @@ const videoFrame = document.getElementById('videoFrame');
 
 videoModal.addEventListener('show.bs.modal', function (event) {
     const button = event.relatedTarget;
-    const src = button.getAttribute('data-video');
-    videoFrame.src = src + '?autoplay=1';
+    let videoUrl = button.getAttribute('data-video');
+    if (!videoUrl) return;
+
+    // 👉 On charge directement le lien (déjà en embed grâce au modèle)
+    videoFrame.src = videoUrl + '?autoplay=1&rel=0&modestbranding=1';
 });
 
 videoModal.addEventListener('hidden.bs.modal', function () {
@@ -297,6 +302,7 @@ videoModal.addEventListener('hidden.bs.modal', function () {
 
 <section class="container podcast-video">
     <!-- Section Titre -->
+
     <div class="text-center mb-5">
         <h2 class="section-title">Tous mes podcasts</h2>
         <p class="section-title-p">
