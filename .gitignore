@@ -22,3 +22,9 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+# Ne pas ignorer storage/app/public/images
+!/storage/app/public
+!/storage/app/public/images
+!/storage/app/public/audio
+!/storage/app/public/podcasts
+!/storage/app/public/projects
