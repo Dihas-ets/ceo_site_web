@@ -1,2 +1,8 @@
 *
 !.gitignore
+# Ignore tout sauf .gitkeep et dossiers media
+*
+!.gitkeep
+!/images/
+!/audio/
+!/video/
