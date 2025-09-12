@@ -15,6 +15,7 @@ class AdminSeeder extends Seeder
             'email' => 'patronne@dihas.com',
             'password' => Hash::make('admin123'), // mot de passe par défaut
             'is_admin' => true,
+            'role' => 'admin',
         ]);
     }
 }
