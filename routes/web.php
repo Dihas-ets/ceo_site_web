@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PodcastController;
-use App\Http\Controllers\admin\SocialController;
+use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FrontendController;
 // Page d'accueil
