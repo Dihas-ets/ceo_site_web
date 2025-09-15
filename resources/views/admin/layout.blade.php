@@ -45,6 +45,19 @@
                     <i class="bi bi-mic-fill me-2"></i> Podcasts
                 </a>
             </li>
+           <li class="nav-item mb-2">
+                <a href="{{ route('admin.categories.index') }}" class="nav-link d-flex align-items-center">
+                    <i class="bi bi-folder-fill me-2"></i> Categories
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="{{ route('admin.socials.index') }}" class="nav-link d-flex align-items-center">
+                    <i class="bi bi-share-fill me-2"></i> Réseaux sociaux
+                </a>
+            </li>
+
+
             @if(auth()->user()->role === 'admin')
             <li class="nav-item mb-2">
                 <a href="{{ route('admin.users.index') }}" class="nav-link d-flex align-items-center">

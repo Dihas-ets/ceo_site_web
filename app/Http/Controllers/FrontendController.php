@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Podcast;
+use App\Models\Social;
 
 class FrontendController extends Controller
 {
@@ -34,7 +35,8 @@ class FrontendController extends Controller
         ->take(6)
         ->get();
 
+        $socials = Social::all();
 
-        return view('welcome', compact('projects', 'latestAudio', 'videos'));
+        return view('welcome', compact('projects', 'latestAudio', 'videos', 'socials'));
     }
 }

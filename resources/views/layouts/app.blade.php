@@ -8,6 +8,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="description" content="Je suis Hizba Boukari, cheffe de projet digital et fondatrice de DIHA’S, une entreprise spécialisée dans la création de solutions numériques sur-mesure (applications mobiles, sites web, plateformes digitales).">
+    <meta name="keywords" content="Hizba Boukari, entrepreneur, digital, innovation, podcasts, projets, numériques, solutions, dihas">
+    <meta name="author" content="Hizba Boukari">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url('/') }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Hizba Boukari - Site Officiel">
+    <meta property="og:description" content="Je suis Hizba Boukari, cheffe de projet digital et fondatrice de DIHA’S, une entreprise spécialisée dans la création de solutions numériques sur-mesure (applications mobiles, sites web, plateformes digitales).">
+    <meta property="og:image" content="{{ asset('storage/images/logo.png' }}">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:type" content="website">
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">

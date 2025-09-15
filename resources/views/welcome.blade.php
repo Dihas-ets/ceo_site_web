@@ -5,7 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="{{ asset('storage/images/logo.png') }}">
 
-    <title> Madame Hizba BOUKARI - CEO de Diha's</title>
+    <title> Hizba BOUKARI - CEO de Diha's</title>
+    <meta name="description" content="Je suis Hizba Boukari, cheffe de projet digital et fondatrice de DIHA’S, une entreprise spécialisée dans la création de solutions numériques sur-mesure (applications mobiles, sites web, plateformes digitales).">
+    <meta name="keywords" content="Hizba Boukari, entrepreneur, digital, innovation, podcasts, projets, numériques, solutions, dihas">
+    <meta name="author" content="Hizba Boukari">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url('/') }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Hizba Boukari - Site Officiel">
+    <meta property="og:description" content="Je suis Hizba Boukari, cheffe de projet digital et fondatrice de DIHA’S, une entreprise spécialisée dans la création de solutions numériques sur-mesure (applications mobiles, sites web, plateformes digitales).">
+    <meta property="og:image" content="{{ asset('storage/images/logo.png' }}">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:type" content="website">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -15,6 +28,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="{{ asset('css/backend.css') }}">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
         <!-- Font Awesome -->
     <!-- Google Fonts -->
@@ -521,11 +535,23 @@
                     <h3>Hizba BOUKARI</h3>
                     <p>CEO de Diha's - Entrepreneure Visionnaire</p>
                     <div class="social-icons mb-4">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        @if($socials->isNotEmpty())
+                            @foreach($socials as $social)
+                                @if($social->link && $social->icon)
+                                    <a href="{{ $social->link }}" target="_blank" class="me-2">
+                                        <i class="{{ $social->icon }} fs-4"></i>
+                                    </a>
+                                @endif
+                            @endforeach
+                        @else
+                            <!-- Icônes par défaut si aucun réseau social -->
+                            <a href="#"><i class="fab fa-facebook-f me-2"></i></a>
+                            <a href="#"><i class="fab fa-twitter me-2"></i></a>
+                            <a href="#"><i class="fab fa-instagram me-2"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in me-2"></i></a>
+                        @endif
                     </div>
+
                     <p>&copy; 2025 Hizba BOUKARI. Tous droits réservés.</p>
                 </div>
             </div>

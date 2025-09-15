@@ -38,6 +38,7 @@ class PodcastController extends Controller
         'link'        => 'nullable|required_if:format,lien|url',
         'file_path'   => 'nullable|required_if:format,fichier|file',
         'duration'    => 'nullable|string|max:50',
+        'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
     ]);
 
     $podcast = new Podcast();
@@ -70,6 +71,7 @@ class PodcastController extends Controller
         $podcast->image = $request->file('image')->store('podcasts/images', 'public');
     }
 
+
     $podcast->save();
 
     return redirect()->route('admin.podcasts.index')
@@ -94,7 +96,8 @@ class PodcastController extends Controller
             'format',
             'link',
             'description',
-            'duration'
+            'duration',
+            'image'
         ]);
     
         // ✅ Mise en avant (indépendante, audio ou vidéo)
@@ -110,8 +113,12 @@ class PodcastController extends Controller
     
         // ✅ Image (si on modifie l’image)
         if ($request->hasFile('image')) {
+            if ($podcast->image && Storage::disk('public')->exists($podcast->image)) {
+                Storage::disk('public')->delete($podcast->image);
+            }
             $data['image'] = $request->file('image')->store('podcasts/images', 'public');
         }
+        
     
         $podcast->update($data);
     

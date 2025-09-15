@@ -12,6 +12,7 @@ class SocialController extends Controller
     {
         $socials = Social::all();
         return view('admin.socials.index', compact('socials'));
+        return view('welcome', compact('socials'));
     }
 
     public function create()
@@ -24,6 +25,7 @@ class SocialController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'link' => 'required|url',
+            'icon' => 'nullable|string|max:255',
         ]);
 
         Social::create($request->all());

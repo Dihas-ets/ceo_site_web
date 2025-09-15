@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Podcast;
+use App\Models\Social;
 
 class PremierPasController extends Controller
 {
@@ -39,7 +40,8 @@ class PremierPasController extends Controller
                     ->latest()
                     ->paginate(6);
 
-
-        return view('premier_pas', compact('featuredAudio', 'featuredVideos', 'podcasts'));
+        $socials = Social::all();
+        
+        return view('premier_pas', compact('featuredAudio', 'featuredVideos', 'podcasts', 'socials'));
     }
 }

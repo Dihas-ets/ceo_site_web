@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PodcastController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FrontendController;
@@ -32,6 +33,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Projets (admin et gestionnaire)
     Route::resource('projects', ProjectController::class);
 
+    // Categories
+    Route::resource('categories', CategoryController::class);
+
     // Podcasts
     Route::resource('podcasts', PodcastController::class);
     Route::get('/podcasts/featured', [PodcastController::class, 'featured'])->name('podcasts.featured');
@@ -47,5 +51,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
 
 Route::get('/premier-pas', [App\Http\Controllers\PremierPasController::class, 'index'])->name('premierpas.index');
+Route::get('/generate-sitemap', [App\Http\Controllers\SitemapController::class, 'generate']);
 
 
