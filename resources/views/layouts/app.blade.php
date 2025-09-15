@@ -17,7 +17,7 @@
     <!-- Open Graph -->
     <meta property="og:title" content="Hizba Boukari - Site Officiel">
     <meta property="og:description" content="Je suis Hizba Boukari, cheffe de projet digital et fondatrice de DIHA’S, une entreprise spécialisée dans la création de solutions numériques sur-mesure (applications mobiles, sites web, plateformes digitales).">
-    <meta property="og:image" content="{{ asset('storage/images/logo.png' }}">
+    <meta property="og:image" content="{{ asset('storage/images/logo.png') }}">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
 
@@ -34,13 +34,6 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-               <!-- <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a> 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                -->
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -53,10 +46,6 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                               <!-- <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                  -->
                             @endif
 
                             @if (Route::has('register'))

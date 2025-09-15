@@ -12,9 +12,10 @@
     <link rel="canonical" href="{{ url('/') }}">
 
     <!-- Open Graph -->
+
     <meta property="og:title" content="Hizba Boukari - Site Officiel">
     <meta property="og:description" content="Je suis Hizba Boukari, cheffe de projet digital et fondatrice de DIHA’S, une entreprise spécialisée dans la création de solutions numériques sur-mesure (applications mobiles, sites web, plateformes digitales).">
-    <meta property="og:image" content="{{ asset('storage/images/logo.png' }}">
+    <meta property="og:image" content="{{ asset('storage/images/logo.png') }}">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
 
@@ -63,98 +64,98 @@
 <!-- Section Podcast Pro -->
 <section id="premierPAS" class="premier-pas show-premier-pas">
   <div class="container">
-    <div class="row align-items-center">
-      
-      <!-- Texte gauche -->
-      <div class="col-lg-6 mb-5 mb-lg-0">
-        <div class="image">
-            <img src="{{ asset('storage/images/logo1erpas1.png') }}" alt="Podcast Premier Pas" class="img-fluid">
-        </div>
-        <h1 class="fw-bold display-4 mb-3">
-          🎙️<span class="text-warning">Un pas </span> à la fois,
-          <span class="text-gradient"> vers ton projet tech</span>
-        </h1>
-        <p class="lead text-light opacity-75 mb-4">
-          <span style="font-weight: bold;">1<sup>er</sup> PAS</span>, c’est le podcast qui accompagne les entrepreneurs africains, 
-          de la diaspora ou du continent, à faire leurs premiers pas dans le monde des startups numériques.
-        </p>
+        <div class="row align-items-center">
+        
+            <!-- Texte gauche -->
+            <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="image">
+                <img src="{{ asset('storage/images/logo1erpas1.png') }}" alt="Podcast Premier Pas" class="img-fluid">
+            </div>
+            <h1 class="fw-bold display-4 mb-3">
+                🎙️<span class="text-warning">Un pas </span> à la fois,
+                <span class="text-gradient"> vers ton projet tech</span>
+            </h1>
+            <p class="lead text-light opacity-75 mb-4">
+                <span style="font-weight: bold;">1<sup>er</sup> PAS</span>, c’est le podcast qui accompagne les entrepreneurs africains, 
+                de la diaspora ou du continent, à faire leurs premiers pas dans le monde des startups numériques.
+            </p>
 
-        <div class="d-flex gap-3 mb-4 btn-play">
-          <button class="btn btn-warning btn-lg px-4 rounded-pill shadow-lg" onclick="togglePlay()" id="playBtnFirst">
-            <i class="fa-solid fa-play"></i> Podcast Mise en Avant
-          </button>
-          <a href="{{ url('/podcasts') }}" class="btn btn-outline-light btn-lg px-4 rounded-pill">
-            📂 Voir tous les podcasts
-          </a>
-        </div>
+            <div class="d-flex gap-3 mb-4 btn-play">
+                <button class="btn btn-warning btn-lg px-4 rounded-pill shadow-lg" onclick="togglePlay()" id="playBtnFirst">
+                <i class="fa-solid fa-play"></i> Podcast Mise en Avant
+                </button>
+                <a href="{{ url('/podcasts') }}" class="btn btn-outline-light btn-lg px-4 rounded-pill">
+                📂 Voir tous les podcasts
+                </a>
+            </div>
 
-        <div class="d-flex align-items-center mt-4 d-none">
-          <div class="me-3 d-flex">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle border border-2 border-white" width="50">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle border border-2 border-white" width="50" style="margin-left:-15px;">
-            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle border border-2 border-white" width="50" style="margin-left:-15px;">
-          </div>
-          <span class="fw-bold fs-5">20M+ Online Listeners</span>
-        </div>
-      </div>
+            <div class="d-flex align-items-center mt-4 d-none">
+                <div class="me-3 d-flex">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle border border-2 border-white" width="50">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle border border-2 border-white" width="50" style="margin-left:-15px;">
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle border border-2 border-white" width="50" style="margin-left:-15px;">
+                </div>
+                <span class="fw-bold fs-5">20M+ Online Listeners</span>
+            </div>
+            </div>
 
-   <!-- Image + lecteur -->
-<div class="col-lg-6 text-center position-relative">
-  <!-- Effet radial -->
-  <div class="radial-bg"></div>
+                <!-- Image + lecteur -->
+            <div class="col-lg-6 text-center position-relative">
+            <!-- Effet radial -->
+            <div class="radial-bg"></div>
 
-  <!-- Photo PNG -->
-  <img src="{{ asset('storage/images/img22.png') }}" alt="Podcast Host" class="img-fluid position-relative" style="z-index: 2;">
+            <!-- Photo PNG -->
+            <img src="{{ asset('storage/images/img22.png') }}" alt="Podcast Host" class="img-fluid position-relative" style="z-index: 2;">
 
-<!-- Lecteur Glassmorphism -->
-<div class="glass-player shadow-lg p-3 rounded-4 position-absolute start-50 translate-middle-x" 
-     style="bottom: 180px; z-index: 3; width: 65%;">
+                <!-- Lecteur Glassmorphism -->
+                <div class="glass-player shadow-lg p-3 rounded-4 position-absolute start-50 translate-middle-x" 
+                    style="bottom: 180px; z-index: 3; width: 65%;">
 
-    <div class="d-flex align-items-center mb-3">
-        <img src="{{ asset('storage/images/logo1erpas2.png') }}" 
-             class="rounded me-3" width="55" height="55" alt="cover">
-        <div>
-            <h6 class="mb-0 fw-bold">INTRO : Bienvenue dans 1er Pas</h6>
-            <small class="text-light">Par Hizba BOUKARI</small>
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{ asset('storage/images/logo1erpas2.png') }}" 
+                            class="rounded me-3" width="55" height="55" alt="cover">
+                        <div>
+                            <h6 class="mb-0 fw-bold">INTRO : Bienvenue dans 1er Pas</h6>
+                            <small class="text-light">Par Hizba BOUKARI</small>
+                        </div>
+                    </div>
+
+                    <div class="progress bg-secondary mb-3" style="height: 5px;">
+                        <div id="progressBar" class="progress-bar bg-warning" style="width: 0%"></div>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-4">
+                        <button class="btn btn-outline-success btn-lg rounded-circle" onclick="rewind()">
+                            <i class="fa-solid fa-backward"></i>
+                        </button>
+                        <button class="btn btn-warning btn-lg rounded-circle text-light" onclick="togglePlay()" id="playBtn">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <button class="btn btn-outline-success btn-lg rounded-circle" onclick="forward()">
+                            <i class="fa-solid fa-forward"></i>
+                        </button>
+                    </div>
+
+                    <!-- Audio principal -->
+                    <audio id="podcastAudio">
+                        @if($featuredAudio && ($featuredAudio->format === 'fichier' || $featuredAudio->format === 'lien'))
+                            <source src="{{ $featuredAudio->format === 'lien' ? $featuredAudio->link : asset('storage/'.$featuredAudio->file_path) }}" 
+                                    type="audio/mpeg">
+                        @else
+                            <source src="{{ asset('storage/audio/Madame.mp3') }}" type="audio/mpeg">
+                        @endif
+                        Votre navigateur ne supporte pas la lecture audio.
+                    </audio>
+
+                </div>
+
+
+            <div class="abonne-count badge bg-warning text-dark fs-6 mt-5 p-3 rounded-pill shadow-lg animate__animated animate__pulse animate__infinite">
+                ✨ Avec +50 entrepreneurs
+            </div>
+            </div>
         </div>
     </div>
-
-    <div class="progress bg-secondary mb-3" style="height: 5px;">
-        <div id="progressBar" class="progress-bar bg-warning" style="width: 0%"></div>
-    </div>
-
-    <div class="d-flex justify-content-center gap-4">
-        <button class="btn btn-outline-success btn-lg rounded-circle" onclick="rewind()">
-            <i class="fa-solid fa-backward"></i>
-        </button>
-        <button class="btn btn-warning btn-lg rounded-circle text-light" onclick="togglePlay()" id="playBtn">
-            <i class="fa-solid fa-play"></i>
-        </button>
-        <button class="btn btn-outline-success btn-lg rounded-circle" onclick="forward()">
-            <i class="fa-solid fa-forward"></i>
-        </button>
-    </div>
-
-    <!-- Audio principal -->
-    <audio id="podcastAudio">
-    @if($featuredAudio && ($featuredAudio->format === 'fichier' || $featuredAudio->format === 'lien'))
-        <source src="{{ $featuredAudio->format === 'lien' ? $featuredAudio->link : asset('storage/'.$featuredAudio->file_path) }}" 
-                type="audio/mpeg">
-    @else
-        <source src="{{ asset('storage/audio/Madame.mp3') }}" type="audio/mpeg">
-    @endif
-    Votre navigateur ne supporte pas la lecture audio.
-</audio>
-
-</div>
-
-
-  <div class="abonne-count badge bg-warning text-dark fs-6 mt-5 p-3 rounded-pill shadow-lg animate__animated animate__pulse animate__infinite">
-    ✨ Avec +50 entrepreneurs
-  </div>
-</div>
-</div>
-</div>
 </section>     
 
 

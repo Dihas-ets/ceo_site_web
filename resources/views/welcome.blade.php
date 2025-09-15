@@ -13,9 +13,10 @@
     <link rel="canonical" href="{{ url('/') }}">
 
     <!-- Open Graph -->
+
     <meta property="og:title" content="Hizba Boukari - Site Officiel">
     <meta property="og:description" content="Je suis Hizba Boukari, cheffe de projet digital et fondatrice de DIHA’S, une entreprise spécialisée dans la création de solutions numériques sur-mesure (applications mobiles, sites web, plateformes digitales).">
-    <meta property="og:image" content="{{ asset('storage/images/logo.png' }}">
+    <meta property="og:image" content="{{ asset('storage/images/logo.png') }}">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
 
@@ -300,209 +301,176 @@
 
     <!-- Projects Section -->
     <section id="portfolio-projects" class="text-center projects-section mb-5">
-    <div class="container">
-        <h2 class="section-title">Mes Projets Réalisés</h2>
-        
-        <div class="row">
-        @foreach($projects as $project)
-            <div class="col-md-4">
-                <div class="project-card mb-4">
-                    <div class="project-image">
-                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
-                    </div>
-                    <div class="project-content">
-                        <h5 class="project-title">{{ $project->title }}</h5>
-                        <p class="project-description">{{ $project->description }}</p>
-                        @if($project->link)
-                            <a href="{{ $project->link }}" target="_blank" class="project-link">Voir plus</a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        </div>
-    </div>
-</section>
-
-
-        
-        <div class="text-center">
-            <a href="https://dihas.tech/dihas-product" class="btn btn-lg view-all-btn">Voir tous les projets</a>
-        </div>
-    </div>
-</section>
-
-
-    <!-- Portfolio Modals -->
-<div class="modal fade portfolio-modal" id="portfolioModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="portfolioModalLabel">Détails du Projet</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <img src="" alt="Project Image" class="img-fluid portfolio-modal-img" id="modalImage">
-                        </div>
-                        <div class="col-md-6">
-                            <h3 id="modalTitle"></h3>
-                            <p id="modalCategory" class="text-muted"></p>
-                            <div id="modalDescription"></div>
-                            <h5 class="mt-4">Technologies utilisées</h5>
-                            <div id="modalTechnologies"></div>
-                            <div class="mt-4">
-                                <a href="#" class="btn btn-primary me-2" id="modalLiveLink">Voir le projet en ligne</a>
-                                <a href="#" class="btn btn-outline-primary" id="modalSourceLink">Code source</a>
+        <div class="container">
+            <h2 class="section-title">Mes Projets Réalisés</h2>
+            
+            <div class="row">
+                @foreach($projects as $project)
+                    <div class="col-md-4">
+                        <div class="project-card mb-4">
+                            <div class="project-image">
+                                <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
+                            </div>
+                            <div class="project-content">
+                                <h5 class="project-title">{{ $project->title }}</h5>
+                                <p class="project-description">{{ $project->description }}</p>
+                                @if($project->link)
+                                    <a href="{{ $project->link }}" target="_blank" class="project-link">Voir plus</a>
+                                @endif
                             </div>
                         </div>
                     </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+
+    <section>      
+        <div class="text-center">
+            <a href="https://dihas.tech/dihas-product" class="btn btn-lg view-all-btn">Voir tous les projets</a>
+        </div>
+    </section>
+
+
+    <!-- Section Podcast Pro -->
+    <section id="premierPAS" class="premier-pas show-premier-pas">
+    <div class="container">
+        <div class="row align-items-center">
+        
+        <!-- Texte gauche -->
+        <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="image">
+                <img src="{{ asset('storage/images/logo1erpas1.png') }}" alt="Podcast Premier Pas" class="img-fluid">
+            </div>
+            <h1 class="fw-bold display-4 mb-3">
+            🎙️<span class="text-warning">Un pas </span> à la fois,
+            <span class="text-gradient"> vers ton projet tech</span>
+            </h1>
+            <p class="lead text-light opacity-75 mb-4">
+            <span style="font-weight: bold;">1<sup>er</sup> PAS</span>, c’est le podcast qui accompagne les entrepreneurs africains, 
+            de la diaspora ou du continent, à faire leurs premiers pas dans le monde des startups numériques.
+            </p>
+
+            <div class="d-flex gap-3 mb-4 btn-play">
+            <button class="btn btn-warning btn-lg px-4 rounded-pill shadow-lg" onclick="togglePlay()" id="playBtnFirst">
+                <i class="fa-solid fa-play"></i> Podcast Mise en Avant
+            </button>
+            <a href="{{ url('/podcasts') }}" class="btn btn-outline-light btn-lg px-4 rounded-pill">
+                📂 Voir tous les podcasts
+            </a>
+            </div>
+        </div>
+
+        <!-- Image + lecteur -->
+        <div class="col-lg-6 text-center position-relative">
+            <!-- Effet radial -->
+            <div class="radial-bg"></div>
+
+            <!-- Photo PNG -->
+            <img src="{{ asset('storage/images/img22.png') }}" alt="Podcast Host" class="img-fluid position-relative" style="z-index: 2;">
+
+            <!-- Lecteur Glassmorphism -->
+            <div class="glass-player shadow-lg p-3 rounded-4 position-absolute start-50 translate-middle-x" style="bottom: 180px; z-index: 3; width: 65%;">
+            <div class="d-flex align-items-center mb-3">
+                <img src="{{ asset('storage/images/logo1erpas2.png') }}" 
+                    class="rounded me-3" width="55" height="55" alt="cover">
+                <div>
+                <h6 class="mb-0 fw-bold">
+                    {{ $latestAudio ? $latestAudio->title : 'INTRO : Bienvenue dans 1er Pas' }}
+                </h6>
+                <small class="text-light">
+                    {{ $latestAudio ? $latestAudio->author : 'Par Hizba BOUKARI' }}
+                </small>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<!-- Section Podcast Pro -->
-<section id="premierPAS" class="premier-pas show-premier-pas">
-  <div class="container">
-    <div class="row align-items-center">
-      
-      <!-- Texte gauche -->
-      <div class="col-lg-6 mb-5 mb-lg-0">
-        <div class="image">
-            <img src="{{ asset('storage/images/logo1erpas1.png') }}" alt="Podcast Premier Pas" class="img-fluid">
-        </div>
-        <h1 class="fw-bold display-4 mb-3">
-          🎙️<span class="text-warning">Un pas </span> à la fois,
-          <span class="text-gradient"> vers ton projet tech</span>
-        </h1>
-        <p class="lead text-light opacity-75 mb-4">
-          <span style="font-weight: bold;">1<sup>er</sup> PAS</span>, c’est le podcast qui accompagne les entrepreneurs africains, 
-          de la diaspora ou du continent, à faire leurs premiers pas dans le monde des startups numériques.
-        </p>
-
-        <div class="d-flex gap-3 mb-4 btn-play">
-          <button class="btn btn-warning btn-lg px-4 rounded-pill shadow-lg" onclick="togglePlay()" id="playBtnFirst">
-            <i class="fa-solid fa-play"></i> Podcast Mise en Avant
-          </button>
-          <a href="{{ url('/podcasts') }}" class="btn btn-outline-light btn-lg px-4 rounded-pill">
-            📂 Voir tous les podcasts
-          </a>
-        </div>
-      </div>
-
-      <!-- Image + lecteur -->
-      <div class="col-lg-6 text-center position-relative">
-        <!-- Effet radial -->
-        <div class="radial-bg"></div>
-
-        <!-- Photo PNG -->
-        <img src="{{ asset('storage/images/img22.png') }}" alt="Podcast Host" class="img-fluid position-relative" style="z-index: 2;">
-
-        <!-- Lecteur Glassmorphism -->
-        <div class="glass-player shadow-lg p-3 rounded-4 position-absolute start-50 translate-middle-x" style="bottom: 180px; z-index: 3; width: 65%;">
-          <div class="d-flex align-items-center mb-3">
-            <img src="{{ asset('storage/images/logo1erpas2.png') }}" 
-                 class="rounded me-3" width="55" height="55" alt="cover">
-            <div>
-              <h6 class="mb-0 fw-bold">
-                {{ $latestAudio ? $latestAudio->title : 'INTRO : Bienvenue dans 1er Pas' }}
-              </h6>
-              <small class="text-light">
-                {{ $latestAudio ? $latestAudio->author : 'Par Hizba BOUKARI' }}
-              </small>
+            <div class="progress bg-secondary mb-3" style="height: 5px;">
+                <div id="progressBar" class="progress-bar bg-warning" style="width: 0%"></div>
             </div>
-          </div>
 
-          <div class="progress bg-secondary mb-3" style="height: 5px;">
-            <div id="progressBar" class="progress-bar bg-warning" style="width: 0%"></div>
-          </div>
-
-          <div class="d-flex justify-content-center gap-4">
-            <button class="btn btn-outline-success btn-lg rounded-circle" onclick="rewind()"><i class="fa-solid fa-backward"></i></button>
-            <button class="btn btn-warning btn-lg rounded-circle text-light" onclick="togglePlay()" id="playBtn"><i class="fa-solid fa-play"></i></button>
-            <button class="btn btn-outline-success btn-lg rounded-circle" onclick="forward()"><i class="fa-solid fa-forward"></i></button>
-          </div>
-
-          <!-- Audio -->
-          <audio id="podcastAudio">
-              <source src="@if($latestAudio)
-                              {{ $latestAudio->format === 'fichier' 
-                                  ? asset('storage/' . $latestAudio->file_path) 
-                                  : $latestAudio->link }}
-                          @else
-                              {{ asset('storage/audio/Madame.mp3') }}
-                          @endif" type="audio/mpeg">
-              Votre navigateur ne supporte pas la lecture audio.
-          </audio>
-        </div>
-
-        <div class="abonne-count badge bg-warning text-dark fs-6 mt-5 p-3 rounded-pill shadow-lg animate__animated animate__pulse animate__infinite">
-          ✨ Avec +50 entrepreneurs
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- Video Section -->
-<section class="container podcast-video">
-  <!-- Section Titre -->
-  <div class="row">
-    <div class="col-md-12">
-      <div class="text-center mb-5">
-        <h2 class="section-title">🎥 Mes Podcasts Vidéo</h2>
-        <p class="section-title-p">
-          Que tu sois dans la diaspora ou sur le continent, ce podcast est là pour t’aider à faire ton 1er pas vers le numérique.
-        </p>
-      </div>
-    </div>
-  </div>
-
-
-    <div class="row g-4 mb-5">
-        @if($videos->isEmpty())
-            <div class="alert alert-warning text-center fw-bold">
-                🚀 Aucun podcast vidéo publié pour le moment.
+            <div class="d-flex justify-content-center gap-4">
+                <button class="btn btn-outline-success btn-lg rounded-circle" onclick="rewind()"><i class="fa-solid fa-backward"></i></button>
+                <button class="btn btn-warning btn-lg rounded-circle text-light" onclick="togglePlay()" id="playBtn"><i class="fa-solid fa-play"></i></button>
+                <button class="btn btn-outline-success btn-lg rounded-circle" onclick="forward()"><i class="fa-solid fa-forward"></i></button>
             </div>
-        @else
-            @foreach($videos as $video)
-                <div class="col-md-4">
-                <div class="card podcast-card h-100"
-     data-bs-toggle="modal"
-     data-bs-target="#videoModal"
-     data-video="{{ $video->link }}">
+
+            <!-- Audio -->
+            <audio id="podcastAudio">
+                <source src="@if($latestAudio)
+                                {{ $latestAudio->format === 'fichier' 
+                                    ? asset('storage/' . $latestAudio->file_path) 
+                                    : $latestAudio->link }}
+                            @else
+                                {{ asset('storage/audio/Madame.mp3') }}
+                            @endif" type="audio/mpeg">
+                Votre navigateur ne supporte pas la lecture audio.
+            </audio>
+            </div>
+
+            <div class="abonne-count badge bg-warning text-dark fs-6 mt-5 p-3 rounded-pill shadow-lg animate__animated animate__pulse animate__infinite">
+            ✨ Avec +50 entrepreneurs
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
 
 
-                        <!-- Image Aperçu -->
-                        <img src="{{ $video->image ? asset('storage/' . $video->image) : asset('images/default.jpg') }}" 
-                             class="card-img-top" 
-                             alt="{{ $video->title }}">
+    <!-- Video Section -->
+    <section class="container podcast-video">
+        <!-- Section Titre -->
+        <div class="row">
+            <div class="col-md-12">
+            <div class="text-center mb-5">
+                <h2 class="section-title">🎥 Mes Podcasts Vidéo</h2>
+                <p class="section-title-p">
+                Que tu sois dans la diaspora ou sur le continent, ce podcast est là pour t’aider à faire ton 1er pas vers le numérique.
+                </p>
+            </div>
+            </div>
+        </div>
 
-                        <!-- Infos -->
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $video->title }}</h5>
-                            <p class="card-text">{{ Str::limit($video->description, 100) }}</p>
-                            <i class="fas fa-user"></i> {{ $video->author }}
-                            <i class="far fa-clock"></i> {{ $video->duration }}
+
+        <div class="row g-4 mb-5">
+            @if($videos->isEmpty())
+                <div class="alert alert-warning text-center fw-bold">
+                    🚀 Aucun podcast vidéo publié pour le moment.
+                </div>
+            @else
+                @foreach($videos as $video)
+                    <div class="col-md-4">
+                    <div class="card podcast-card h-100"
+        data-bs-toggle="modal"
+        data-bs-target="#videoModal"
+        data-video="{{ $video->link }}">
+
+
+                            <!-- Image Aperçu -->
+                            <img src="{{ $video->image ? asset('storage/' . $video->image) : asset('images/default.jpg') }}" 
+                                class="card-img-top" 
+                                alt="{{ $video->title }}">
+
+                            <!-- Infos -->
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $video->title }}</h5>
+                                <p class="card-text">{{ Str::limit($video->description, 100) }}</p>
+                                <i class="fas fa-user"></i> {{ $video->author }}
+                                <i class="far fa-clock"></i> {{ $video->duration }}
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        @endif
-    </div>
-
-    <!-- Bouton Voir tous les podcasts -->
-    <div class="row mb-5">
-        <div class="col-md-12 text-center">
-            <a href="{{ url('/premier-pas') }}" class="btn btn-lg btn-primary view-all-btn">Visitez tous les podcasts</a>
+                @endforeach
+            @endif
         </div>
-    </div>
-</section>
+
+        <!-- Bouton Voir tous les podcasts -->
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <a href="{{ url('/premier-pas') }}" class="btn btn-lg btn-primary view-all-btn">Visitez tous les podcasts</a>
+            </div>
+        </div>
+    </section>
 
 <!-- Modal -->
 <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
