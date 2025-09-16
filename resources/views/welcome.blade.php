@@ -176,7 +176,11 @@
 </nav>
 
 <!-- Hero Section avec forme ovale et photo -->
-<section id="home" class="hero">
+<section id="home" class="hero" style="position:relative;">
+    <div style="width: 200px; background-color: rgba(26, 77, 45, 0.95); position: absolute; top: 111px; right: 0;
+    border-bottom-left-radius: 35px; border-bottom-right-radius: 35px; text-align: center; z-index: 1;">
+        Pour les entrepreneurs africains et de la diaspora
+    </div>
     <div class="container custum-padding">
         <div class="row align-items-center row-reverse-sm">
             <div class="col-lg-6 animate-up mb-3">

@@ -238,7 +238,7 @@ audio.addEventListener('ended', () => {
                                      class="d-block w-100 h-100" style="object-fit: cover;" alt="{{ $podcast->title }}">
 
                                 <!-- Overlay -->
-                                <div class="carousel-overlay position-absolute bottom-0 start-0 w-100 p-3 bg-opacity-50 text-dark">
+                                <div class="carousel-overlay position-absolute bottom-0 start-0 w-100 p-3 bg-opacity-50">
                                     <h5 class="carousel-title">{{ $podcast->title }}</h5>
                                     <p class="carousel-series">{{ Str::limit($podcast->description, 80) }}</p>
                                     <div class="carousel-meta mb-2">
