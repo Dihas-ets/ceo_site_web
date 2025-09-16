@@ -177,7 +177,7 @@
 
 <!-- Hero Section avec forme ovale et photo -->
 <section id="home" class="hero" style="position:relative;">
-    <div style="width: 200px; background-color: rgba(26, 77, 45, 0.95); position: absolute; top: 111px; right: 0;
+    <div style="width: 200px; background-color: #a07c24; position: absolute; top: 111px; right: 0;
     border-bottom-left-radius: 35px; border-bottom-right-radius: 35px; text-align: center; z-index: 1;">
         Pour les entrepreneurs africains et de la diaspora
     </div>
